@@ -34,7 +34,8 @@ map ,9 :b!9<CR>
 map ,0 :b!10<CR>
 
 " ========== Ctags ==========
-set tags=./tags,/home/sol/dev/tags,/home/sol/dev/linux/tags " 경로 추가해야함
+set tags+=./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
+set tags+=./tags;
 if version >= 500
 func! Sts()
 	let st= expand("<cword>") " current word
@@ -57,8 +58,16 @@ set nocsverb
 
 if filereadable("./cscope.out")
 	cs add cscope.out
-else
-	cs add /home/sol/dev/linux/cscope.out " 경로 추가해야 함
+elseif filereadable("../cscope.out")
+	cs add ../cscope.out
+elseif filereadable("../../cscope.out")
+	cs add ../../cscope.out
+elseif filereadable("../../../cscope.out")
+	cs add ../../../cscope.out
+elseif filereadable("../../../../cscope.out")
+	cs add ../../../../cscope.out
+elseif filereadable("../../../../../cscope.out")
+	cs add ../../../../../cscope.out
 endif
 set csverb
 
